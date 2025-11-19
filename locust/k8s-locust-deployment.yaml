@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: locust
+  namespace: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: locust
+  template:
+    metadata:
+      labels:
+        app: locust
+    spec:
+      containers:
+      - name: locust
+        image: locustio/locust:2.17.0
+        args: ["-f", "/mnt/locust/locustfile.py", "--host", "http://simple-web.demo.svc.cluster.local"]
+        ports:
+        - containerPort: 8089
+        volumeMounts:
+        - name: locustfile
+          mountPath: /mnt/locust
+      volumes:
+      - name: locustfile
+        configMap:
+          name: locustfile-cm
