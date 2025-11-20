@@ -10,6 +10,14 @@ data:
     class QuickUser(HttpUser):
         wait_time = between(1, 2)
 
-        @task
+        @task(5)yes 
         def index(self):
-            self.client.get("/")
+            self.client.get("/index.html")
+
+        @task(3)
+        def about(self):
+            self.client.get("/about.html")
+
+        @task(1)
+        def contact(self):
+            self.client.get("/contact.html")
