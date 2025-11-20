@@ -16,7 +16,7 @@ spec:
       containers:
       - name: locust
         image: locustio/locust:2.17.0
-        args: ["-f", "/mnt/locust/locustfile.py", "--host", "http://simple-web.demo.svc.cluster.local"]
+        args: ["-f", "/mnt/locust/locustfile.py",]
         ports:
         - containerPort: 8089
         volumeMounts:
